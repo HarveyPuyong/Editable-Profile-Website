@@ -1,0 +1,140 @@
+form{
+  --txt-color: white;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--accent-color);
+  border-radius: 5px;
+  width: 90%;
+  max-width: 550px;
+  padding: 20px 5%;
+  z-index: 100;
+}
+
+form.hide{
+  display: none;
+}
+
+.form__cancel-btn{
+  position: absolute;
+  right: 4%;
+  top: 8px;
+  font-size: clamp(2rem, 5vw, 2.3rem);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.form-heading{
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--txt-color);
+  font-size: clamp(2rem, 7vw, 2.4rem);
+  margin-top: 40px;
+}
+
+.form__input-label{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  /* opacity: 0.8; */
+}
+
+form input{
+  position: relative;
+  width: 100%;
+  border: 2px solid white;
+  border-radius: 2px;
+  z-index: 1000000;
+  pointer-events: auto;
+  color: rgba(9, 9, 9, 0.792);
+  font-size: 1.1rem;
+  padding: 3px 10px;
+}
+
+form input:focus{
+  border: 2px solid white;
+  outline: 1px solid white;
+}
+
+form button{
+  width: 100%;
+  padding: 13px;
+  font-weight: 600;
+  color: rgb(18, 90, 172);
+  border: none;
+  border-radius: 4px;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  margin-top: 30px;
+  margin-bottom: 7px;
+}
+
+/* Login Form */
+.login-form__password,
+.login-form__email{
+  margin-bottom: 10px;
+  color: var(--txt-color);
+  pointer-events: none;
+}
+
+.login-form__forgot-password{
+  text-align: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+/* Reset Password Form */
+.reset-password-form .form-heading{
+  margin-top: 20px;
+}
+
+.reset-password-form__new-password,
+.reset-password-form__re-enter-password{
+  margin-bottom: 16px;
+  color: var(--txt-color);
+  pointer-events: none;
+}
+
+.reset-password-form__back-to-login-form{
+  text-align: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* OTP Form */
+.otp-form .form-heading{
+  margin-bottom: 2px;
+  font-size: 2.3rem;
+}
+
+.otp-form__sub-heading{
+  margin-bottom: 50px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.71);
+  font-weight: normal;
+}
+
+.otp-form__inputs{
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.otp-form__inputs input{
+  text-align: center;
+  height: 50px;
+  font-size: 1.1rem;
+}
+
+.otp-form__resend{
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.otp-form__resend-otp{
+  cursor: pointer;
+  z-index: 100;
+}

@@ -1,3 +1,17 @@
+.blur-bg{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.709);
+  z-index: 10;
+}
+
+.blur-bg.hide{
+  display: none;
+}
+
 .wrapper{
   --wrapper-max-width: 600px;
   --wrapper-padding: 10%;
@@ -11,6 +25,8 @@
 }  
 
 header{
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 50px;
 }
 
@@ -24,7 +40,7 @@ header{
   background-color: black;
   padding: 3px 6px;
   border-radius: 20px;
-  margin-left: auto;
+  /* margin-left: auto; */
   cursor: pointer;
 }
 
@@ -67,6 +83,17 @@ header{
   to {
     left : 3px;
   }
+}
+
+.edit-btn{
+  padding: 0px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  height: 27px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.217);
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 main{
@@ -114,13 +141,32 @@ main{
   padding: 9px 40px;
   border-radius: 20px;
   margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.email-popup {
+  position: fixed;
+  top: 0px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes popup-appear {
+  0% {
+    opacity: 1;
+    /* transform: translateY(-15px); */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
 }
 
 .line-seperator{
   width: 400px;
   height: 1.8px;
   background-color: var(--accent-color);
-  opacity: 0.3;
+  opacity: 0.2;
   margin-bottom: 15px;
 }
 

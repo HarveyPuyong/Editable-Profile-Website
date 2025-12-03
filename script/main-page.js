@@ -1,3 +1,6 @@
+/* ==========================================================================
+   CHANGE THEME
+   ========================================================================== */
 const toggleTheme = () => {
   const toggleThemeBtn = document.querySelector('.toggle-theme-button');
   const body = document.querySelector('body');
@@ -36,4 +39,70 @@ const toggleTheme = () => {
   });
 };
 
-toggleTheme();
+/* ==========================================================================
+   EMAIL POP UP
+   ========================================================================== */
+const emailPopup = () => {
+  const emailPopup = document.querySelector('.email-popup');
+  const emailMeBtn = document.querySelector('.email-me-btn');
+
+  emailMeBtn.addEventListener('click', () => {
+    emailPopup.style.animation = 'none';
+    emailPopup.offsetHeight;
+
+    emailPopup.style.animation = 'popup-appear 2s ease-out';
+  });
+}
+
+/* ==========================================================================
+   TOGGLE LOGIN FORM
+   ========================================================================== */
+const toggleLoginForm = () => {
+    const loginForm = document.querySelector('#login-form');
+    const blurBG = document.querySelector('.blur-bg');
+
+    document.querySelector('.header__enable-edit-btn').addEventListener('click', () => {
+      loginForm.classList.remove('hide');
+      blurBG.classList.remove('hide');
+    });
+
+    document.querySelector('#login-form .form__cancel-btn').addEventListener('click', () => {
+      loginForm.classList.add('hide');
+      blurBG.classList.add('hide');
+    });
+}
+
+/* ==========================================================================
+   TOGGLE OTP FORM
+   ========================================================================== */
+const toggleOTPForm = () => {
+  const loginForm = document.querySelector('#login-form');
+  const OTPForm = document.querySelector('#otp-form');
+
+  document.querySelector('.login-form__forgot-password').
+    addEventListener('click', () => {
+      loginForm.classList.add('hide');
+      OTPForm.classList.remove('hide');
+    });
+
+  document.querySelector('#otp-form .form__cancel-btn').
+    addEventListener('click', () => {
+      loginForm.classList.remove('hide');
+      OTPForm.classList.add('hide');
+    });
+}
+
+
+/* ==========================================================================
+   MAIN FUNCTION
+   ========================================================================== */
+function Main(){
+  toggleTheme();
+  emailPopup();
+  toggleLoginForm();
+  toggleOTPForm();
+}
+
+
+Main();
+
