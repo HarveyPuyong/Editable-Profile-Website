@@ -34,6 +34,9 @@ app.use('/uploads', Express.static(path.join(__dirname, 'uploads')));
 //   return res.redirect('landing-page.html');
 // });
 
+// app.use('/data', require('./routes/data-route'));
+app.use('/auth', require('./routes/auth-route'));
+
 
 app.use(errorHandler);
 
