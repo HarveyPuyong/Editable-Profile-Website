@@ -30,11 +30,11 @@ app.use(Express.static(path.join(__dirname, 'frontend')));
 
 app.use('/uploads', Express.static(path.join(__dirname, 'uploads')));
 
-// app.get('/', (req, res) => {
-//   return res.redirect('landing-page.html');
-// });
+app.get('/', (req, res) => {
+  return res.redirect('main-page.html');
+});
 
-// app.use('/data', require('./routes/data-route'));
+app.use('/content', require('./routes/content-route'));
 app.use('/auth', require('./routes/auth-route'));
 
 
