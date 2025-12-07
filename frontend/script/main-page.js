@@ -1,3 +1,63 @@
+import { getContents } from "./../api/content-api.js"
+import authMain from "./auth.js";
+
+
+const displayContents = async() => {
+  const contents = await getContents();
+
+  const email = contents.email;
+
+  const {
+    bio,
+    instagramLink,
+    logo,
+    name,
+    profileImage,
+    shopLink,
+    skill,
+    tiktokLink,
+    updatedAt,
+    youtubeLink,
+  } = contents.info;
+
+
+  let contentHTML = `
+    <img src="${profileImage}" alt="profile-image" class="profile-image">
+
+    <h1 class="name">${name}</h1>
+    <p class="skills">${skill}</p>
+    <p class="bio">${bio}</p>
+    <div class="email-me-btn">Email Me</div>
+    <div class="email-popup">${email}</div>
+
+    <div class="line-seperator"></div>
+
+    <div class="socials-list">
+      <a href="${shopLink}" class="socials-list__social">
+        <img src="images-and-icons/white-shop-b.png" alt="shop-icon">
+        <p class="socials-list__social-name">Shop</p>
+      </a>
+      <a href="${tiktokLink}" class="socials-list__social">
+        <img src="images-and-icons/W-tiktok.png" alt="tiktok-icon">
+        <p class="socials-list__social-name">TikTok</p>
+      </a>
+      <a href="${youtubeLink}" class="socials-list__social">
+        <img src="images-and-icons/W-youtube.png" alt="youtube-icon">
+        <p class="socials-list__social-name">Youtube</p>
+      </a>
+      <a href="${instagramLink}" class="socials-list__social">
+        <img src="images-and-icons/W-instagram.png" alt="instagram-icon">
+        <p class="socials-list__social-name">Instagram</p>
+      </a>
+    </div>
+  `;
+
+  const parent = document.querySelector('.content-container');
+  parent.innerHTML = contentHTML;
+
+  document.dispatchEvent(new Event("contentLoaded"));
+}
+
 /* ==========================================================================
    CHANGE THEME
    ========================================================================== */
@@ -43,14 +103,16 @@ const toggleTheme = () => {
    EMAIL POP UP
    ========================================================================== */
 const emailPopup = () => {
-  const emailPopup = document.querySelector('.email-popup');
-  const emailMeBtn = document.querySelector('.email-me-btn');
+  document.addEventListener('contentLoaded', () => {
+    const emailPopup = document.querySelector('.email-popup');
+    const emailMeBtn = document.querySelector('.email-me-btn');
 
-  emailMeBtn.addEventListener('click', () => {
-    emailPopup.style.animation = 'none';
-    emailPopup.offsetHeight;
+    emailMeBtn.addEventListener('click', () => {
+      emailPopup.style.animation = 'none';
+      emailPopup.offsetHeight;
 
-    emailPopup.style.animation = 'popup-appear 2s ease-out';
+      emailPopup.style.animation = 'popup-appear 2s ease-out';
+    });
   });
 }
 
@@ -97,10 +159,12 @@ const toggleOTPForm = () => {
    MAIN FUNCTION
    ========================================================================== */
 function Main(){
+  displayContents();
   toggleTheme();
   emailPopup();
   toggleLoginForm();
   toggleOTPForm();
+  authMain();
 }
 
 
