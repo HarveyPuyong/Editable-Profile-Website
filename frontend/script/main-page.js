@@ -2,6 +2,9 @@ import { getContents } from "./../api/content-api.js"
 import authMain from "./auth.js";
 
 
+/* ==========================================================================
+   DISPLAY CONTENT
+   ========================================================================== */
 const displayContents = async() => {
   const contents = await getContents();
 

@@ -58,7 +58,7 @@ form{
   display: inline;
   margin-right: 3px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 
@@ -92,10 +92,10 @@ form{
 .detail__input{
   pointer-events:all;
   border: 1px solid rgba(0, 0, 0, 0.789);
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: rgb(86, 86, 86);
-  padding: 5px 10px;
-  width: 200px;
+  padding: 8px 10px;
+  width: 50%;
   border-radius: 5px;
 }
 

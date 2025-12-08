@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const contentSchema = new mongoose.Schema({
-  logo: { type: String, default: "default-logo.png" },
+  logo: { type: String, default: "/uploads/meowish-profile-logo.png" },
   profileImage: { type: String, default: '/uploads/profile-pic.png' },
   name: { type: String, default: "Portfolio Owner" },
   skill: { type: String, default: "Web Developer" },
