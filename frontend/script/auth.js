@@ -1,9 +1,8 @@
-import {loginUser} from "./../api/auth-api.js"
+import attachInputSanitizers from "./../utils/sanitize-input.js"
+import {loginUser} from "./../api/auth-api.js";
 
 const handleLogin = () => {
   const loginForm = document.getElementById('login-form');
-
-  console.log(loginForm)
 
   loginForm.addEventListener('submit', async(e) => {
     e.preventDefault();
@@ -22,5 +21,6 @@ const handleLogin = () => {
 
 
 export default function authMain() {
+  attachInputSanitizers();
   handleLogin();
 }

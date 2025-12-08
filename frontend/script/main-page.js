@@ -159,6 +159,30 @@ const toggleOTPForm = () => {
 
 
 /* ==========================================================================
+   TOGGLE PASSWORD VISIBILITY
+   ========================================================================== */
+const togglePasswordVisibility = () => {
+  document.querySelectorAll(".password-wrapper").forEach(wrapper => {
+    const passwordInput = wrapper.querySelector("input[type='password'], input[type='text']");
+    const eyeIcon = wrapper.querySelector(".toggle-password-icon");
+
+    if (!passwordInput || !eyeIcon) return; 
+
+    eyeIcon.addEventListener("click", () => {
+      const isHidden = passwordInput.type === "password";
+
+      // Toggle visibility
+      passwordInput.type = isHidden ? "text" : "password";
+
+      // Toggle icons
+      eyeIcon.classList.toggle("fa-eye");
+      eyeIcon.classList.toggle("fa-eye-slash");
+    });
+  });
+};
+
+
+/* ==========================================================================
    MAIN FUNCTION
    ========================================================================== */
 function Main(){
@@ -168,6 +192,7 @@ function Main(){
   toggleLoginForm();
   toggleOTPForm();
   authMain();
+  togglePasswordVisibility();
 }
 
 
