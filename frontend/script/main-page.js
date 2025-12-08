@@ -24,6 +24,8 @@ const displayContents = async() => {
   } = contents.info;
 
 
+  document.querySelector('.otp-form__sub-heading--email').innerText = contents.email;
+
   let contentHTML = `
     <img src="${profileImage}" alt="profile-image" class="profile-image">
 

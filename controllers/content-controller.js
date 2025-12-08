@@ -28,7 +28,7 @@ const changeContent = async (req, res) => {
     // ===============================
     // HANDLE LOGO IMAGE UPLOAD
     // ===============================
-    const logoImage = req.files?.logo
+    const logo = req.files?.logo
       ? `/uploads/${req.files.logo[0].filename}`
       : existingInfo?.logo;
 
@@ -44,7 +44,6 @@ const changeContent = async (req, res) => {
     const updatedInfo = await infoDB.findOneAndUpdate(
       {},
       {
-        logoImage,
         name,
         skill,
         bio,
@@ -52,7 +51,8 @@ const changeContent = async (req, res) => {
         tiktokLink,
         youtubeLink,
         instagramLink,
-        profileImage
+        profileImage,
+        logo,
       },
       { new: true, upsert: true }
     );

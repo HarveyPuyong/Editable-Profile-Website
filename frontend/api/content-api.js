@@ -15,4 +15,36 @@ const getContents = async () => {
 }
 
 
-export {getContents}
+/* ==========================================================================
+   EDIT CONTENTS
+   ========================================================================== */
+const editContents = async (formData) => {
+  try {
+    const response = await api.put("/content/change-content", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    if (response.status === 200) {
+      console.log("Content updated successfully:", response.data);
+    }
+  } catch (error) {
+    console.error("Failed to edit contents:", error);
+  }
+}
+
+/* ==========================================================================
+   EDIT EMAIL
+   ========================================================================== */
+const editEmail = async (data) => {
+  try {
+    const response = await api.patch("/content/email", data); 
+    if (response.status === 200) {
+      console.log("Content updated successfully:", response.data);
+    }
+
+  } catch (error) {
+    console.error("Failed to edit contents:", error);
+  }
+};
+
+
+export {getContents, editContents, editEmail}
