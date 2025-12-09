@@ -27,7 +27,7 @@ const editContents = async (formData) => {
       console.log("Content updated successfully:", response.data);
     }
   } catch (error) {
-    console.error("Failed to edit contents:", error);
+    throw error
   }
 }
 
@@ -36,13 +36,13 @@ const editContents = async (formData) => {
    ========================================================================== */
 const editEmail = async (data) => {
   try {
-    const response = await api.patch("/content/email", data); 
+    const response = await api.patch("/content/change-email", data); 
     if (response.status === 200) {
       console.log("Content updated successfully:", response.data);
     }
 
   } catch (error) {
-    console.error("Failed to edit contents:", error);
+    throw error
   }
 };
 

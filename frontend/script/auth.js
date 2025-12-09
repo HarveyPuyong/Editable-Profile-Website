@@ -1,5 +1,6 @@
 import attachInputSanitizers from "./../utils/sanitize-input.js"
 import {loginUser, sendOTP, verifyOTP, changePassword} from "./../api/auth-api.js";
+import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
 
 
 /* ==========================================================================
@@ -31,14 +32,9 @@ const handleSendOTP = () => {
 
   buttons.forEach(button => {
     button.addEventListener('click', async () => {
-      try{
-        const response = await sendOTP();
-         
-        if(response.status === 200) alert(response.data.message);
-
-      }catch (err){
-        alert(err.message);
-      }
+      const response = await sendOTP();
+        
+      if(response.status === 200) popupSuccess(response.data.message);  
     });
   });
 }
@@ -101,7 +97,8 @@ const handleVerifyOTP = () => {
         otpForm.classList.add('hide');
       } 
     } catch (err) {
-      alert(err.response.data.message);
+      const errorMessage = err.response.data.message;
+      popupError(errorMessage);
       otpInputs.forEach(inp => (inp.value = ''));
       otpInputs[0].focus();
     }
@@ -127,13 +124,15 @@ const handleChangePassword = () => {
     try{
       const response = await changePassword(data);
        if(response.status === 200) {
-          alert(response.data.message);
+          const responseMessage = response.data.message
+          popupSuccess(responseMessage);
           changePasswordForm.classList.add("hide");
           login.classList.remove("hide");
        }  
 
     } catch (err) {
-      alert(err.response.data.message);
+      const errorMessage = err.response.data.message;
+      popupError(errorMessage);
       changePasswordForm.reset();
     }
   });

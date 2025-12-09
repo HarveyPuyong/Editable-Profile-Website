@@ -1,7 +1,6 @@
 import { getContents } from "./../api/content-api.js"
 import authMain from "./auth.js";
 
-
 /* ==========================================================================
    DISPLAY CONTENT
    ========================================================================== */
@@ -24,7 +23,7 @@ const displayContents = async() => {
   } = contents.info;
 
 
-  document.querySelector('.otp-form__sub-heading--email').innerText = contents.email;
+  // document.querySelector('.otp-form__sub-heading--email').innerText = contents.email;
 
   let contentHTML = `
     <img src="${profileImage}" alt="profile-image" class="profile-image">
@@ -33,7 +32,7 @@ const displayContents = async() => {
     <p class="skills">${skill}</p>
     <p class="bio">${bio}</p>
     <div class="email-me-btn">Email Me</div>
-    <div class="email-popup">${email}</div>
+    <div class="email-popup">Copied To Clipboard "${email}"</div>
 
     <div class="line-seperator"></div>
 
@@ -103,6 +102,7 @@ const toggleTheme = () => {
     }
   });
 };
+
 
 /* ==========================================================================
    EMAIL POP UP

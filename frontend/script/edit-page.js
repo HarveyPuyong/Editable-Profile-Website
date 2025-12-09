@@ -1,5 +1,6 @@
 import attachInputSanitizers from "./../utils/sanitize-input.js"
-import { getContents, editContents, editEmail } from "./../api/content-api.js";
+import { getContents, editContents, editEmail } from "./../api/content-api.js"
+import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
 
 
 /* ==========================================================================
@@ -170,10 +171,11 @@ const handleEditContent = () => {
         await editContents(formData); // update info fields
         await editEmail({ email });   // update email only
 
-        alert("Saved successfully!");
+        popupSuccess("Content updated successfully");
       } catch (error) {
-        console.error("Error saving content:", error);
-        alert("Failed to save changes.");
+        // const errorMessage = error.response.data.message;
+        console.log(`Failed to update content: ${error}`);
+        popupError("Failed to update content");
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "Save";

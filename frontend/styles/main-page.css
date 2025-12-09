@@ -149,6 +149,7 @@ header{
   top: 0px;
   opacity: 0;
   pointer-events: none;
+  color: var(--text-color);
 }
 
 @keyframes popup-appear {

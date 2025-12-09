@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/edit-page.css">
+    <link rel="stylesheet" href="styles/popup-alert.css">
     <!-- Axios CDN -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -13,6 +14,26 @@
   <body>  
     <div class="wrapper">
       <form id="edit-form"> All contents render in edit-page.js </form>
+    </div>
+
+    <!-- ===== SUCCESS POPUP===== -->
+    <div class="popup-alert popup-success hide">
+      <i class="fa-solid fa-check popup-alert__icon"></i>
+
+      <p class="popup-alert__result">SUCCESS</p>
+      <p class="popup-alert__details">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque repellendus explicabo sapiente aperiam officia eius</p>
+
+      <button class="popup-alert__button" type="button">Okay</button>
+    </div>
+
+    <!-- ===== ERROR POPUP===== -->
+    <div class="popup-alert popup-error hide">
+      <i class="fa-solid fa-xmark popup-alert__icon"></i>
+
+      <p class="popup-alert__result">ERROR</p>
+      <p class="popup-alert__details">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque repellendus explicabo sapiente aperiam officia eius</p>
+
+      <button class="popup-alert__button" type="button">Okay</button>
     </div>
 
     <script type="module" src="script/edit-page.js"></script>

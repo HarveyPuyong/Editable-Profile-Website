@@ -1,4 +1,5 @@
 import api from "./../utils/axios-config.js";
+import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
 
 
 /* ==========================================================================
@@ -8,9 +9,10 @@ const loginUser = async (credentials) => {
   try{
     const response = await api.post("/auth/login", credentials);
     if(response.status === 200) return response.data;
-  }catch(err){
+  }
+  catch(err){
     const errorMessage = err.response.data.message;
-    console.log(errorMessage);
+    popupError(errorMessage);
   }
 }
 
@@ -24,7 +26,8 @@ const sendOTP = async () => {
     if(response.status === 200) return response;
 
   } catch (err) {
-    throw err
+    const errorMessage = err.response.data.message;
+    popupError(errorMessage);
   }
 }
 

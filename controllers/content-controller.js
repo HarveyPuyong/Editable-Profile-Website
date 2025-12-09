@@ -58,7 +58,7 @@ const changeContent = async (req, res) => {
     );
 
     res.status(200).json({
-      message: "Info updated successfully.",
+      message: "Content updated successfully.",
       info: updatedInfo,
     });
 
