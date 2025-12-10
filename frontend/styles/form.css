@@ -2,7 +2,7 @@ form{
   --txt-color: white;
 
   position: fixed;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--accent-color);
@@ -11,7 +11,18 @@ form{
   max-width: 550px;
   padding: 20px 5%;
   z-index: 100;
+  opacity: 0;
+  animation: fade-in-form 0.15s forwards ease-in-out;
 }
+
+@keyframes fade-in-form{
+  100%{
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+
 
 form.hide{
   display: none;
@@ -153,6 +164,10 @@ form button{
   z-index: 10000;
   cursor: pointer;
   pointer-events: auto;
+}
+
+.reset-password-form{
+  background-color: #1293fc;
 }
 
 /* .password-wrapper-slash{

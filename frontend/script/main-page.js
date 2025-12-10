@@ -37,19 +37,19 @@ const displayContents = async() => {
     <div class="line-seperator"></div>
 
     <div class="socials-list">
-      <a href="${shopLink}" class="socials-list__social">
+      <a href="${shopLink}" class="socials-list__social" target="_blank">
         <img src="images-and-icons/white-shop-b.png" alt="shop-icon">
         <p class="socials-list__social-name">Shop</p>
       </a>
-      <a href="${tiktokLink}" class="socials-list__social">
+      <a href="${tiktokLink}" class="socials-list__social" target="_blank">
         <img src="images-and-icons/W-tiktok.png" alt="tiktok-icon">
         <p class="socials-list__social-name">TikTok</p>
       </a>
-      <a href="${youtubeLink}" class="socials-list__social">
+      <a href="${youtubeLink}" class="socials-list__social" target="_blank">
         <img src="images-and-icons/W-youtube.png" alt="youtube-icon">
         <p class="socials-list__social-name">Youtube</p>
       </a>
-      <a href="${instagramLink}" class="socials-list__social">
+      <a href="${instagramLink}" class="socials-list__social" target="_blank">
         <img src="images-and-icons/W-instagram.png" alt="instagram-icon">
         <p class="socials-list__social-name">Instagram</p>
       </a>
@@ -102,7 +102,6 @@ const toggleTheme = () => {
     }
   });
 };
-
 
 /* ==========================================================================
    EMAIL POP UP
@@ -158,7 +157,6 @@ const toggleOTPForm = () => {
       OTPForm.classList.add('hide');
     });
 }
-
 
 /* ==========================================================================
    TOGGLE PASSWORD VISIBILITY

@@ -26,8 +26,9 @@ const sendOTP = async () => {
     if(response.status === 200) return response;
 
   } catch (err) {
-    const errorMessage = err.response.data.message;
-    popupError(errorMessage);
+    throw err
+    // const errorMessage = err.response.data.message;
+    // popupError(errorMessage);
   }
 }
 

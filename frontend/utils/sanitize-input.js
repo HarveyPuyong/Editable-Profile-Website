@@ -8,8 +8,8 @@ function sanitizeInput(value) {
   // Remove control characters + invisible zero-width chars
   value = value.replace(/[\u0000-\u001F\u007F-\u009F\u200B-\u200F\uFEFF]/g, "");
 
-  // Remove characters that are rarely valid in real systems, except "|"
-  value = value.replace(/[^\p{L}\p{N}@._\- '|]/gu, "");
+  // Remove characters that are rarely valid in real systems, except "|", ":", "/"
+  value = value.replace(/[^\p{L}\p{N}@._\- '|:\/]/gu, "");
 
   return value;
 }

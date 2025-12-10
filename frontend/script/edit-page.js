@@ -97,7 +97,6 @@ const displayContents = async() => {
   document.dispatchEvent(new Event("contentLoaded"));
 }
 
-
 /* ==========================================================================
    HANDLE EDIT CONTENT
    ========================================================================== */

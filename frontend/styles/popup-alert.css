@@ -15,11 +15,10 @@
   z-index: 1000;
   box-shadow: 1px 5px 5px 5px rgba(40, 38, 38, 0.217);
   opacity: 0;
-  animation: fade-in 0.15s forwards ease-in-out;
+  animation: fade-in-alert 0.15s forwards ease-in-out;
 }
 
-@keyframes fade-in{
-
+@keyframes fade-in-alert{
   100%{
     top: 45%;
     opacity: 1;

@@ -8,6 +8,7 @@ import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
    ========================================================================== */
 const handleLogin = () => {
   const loginForm = document.getElementById('login-form');
+  const loader = document.querySelector('.cat-loading-container');
 
   loginForm.addEventListener('submit', async(e) => {
     e.preventDefault();
@@ -15,11 +16,23 @@ const handleLogin = () => {
     const email = loginForm.querySelector("#email-input").value.trim();
     const password = loginForm.querySelector("#password-input").value.trim();
 
-    const data = await loginUser({email, password});
+    if (loader) loader.classList.remove('hide');
 
-    if (data?.accessToken) {
-      localStorage.setItem("accessToken", data.accessToken);
-      window.location.replace("/edit-page.html");
+    // show loader for 2 seconds before attempting login
+    await new Promise((res) => setTimeout(res, 3000));
+
+    if (loader) loader.classList.add('hide');
+
+    try {
+      const data = await loginUser({email, password});
+
+      if (data?.accessToken) {
+        localStorage.setItem("accessToken", data.accessToken);
+        window.location.replace("/edit-page.html");
+      }
+    } catch (err) {
+      const errorMessage = err?.response?.data?.message || err.message || 'Login failed';
+      popupError(errorMessage);
     }
   });
 }
@@ -29,12 +42,23 @@ const handleLogin = () => {
 // ===============================
 const handleSendOTP = () => {
   const buttons = document.querySelectorAll('.login-form__forgot-password, .otp-form__resend-otp');
+  const loader = document.querySelector('.cat-loading-container');
 
   buttons.forEach(button => {
     button.addEventListener('click', async () => {
-      const response = await sendOTP();
+      if (loader) loader.classList.remove('hide');
+
+      try {
+        const response = await sendOTP();
+        if (response?.status === 200) popupSuccess(response.data.message);
+
+      } catch (err) {
+        const errorMessage = err?.response?.data?.message || err.message || 'An error occurred';
+        popupError(errorMessage);
         
-      if(response.status === 200) popupSuccess(response.data.message);  
+      } finally {
+        if (loader) loader.classList.add('hide');
+      }
     });
   });
 }
@@ -95,6 +119,8 @@ const handleVerifyOTP = () => {
       if (response.status === 200) {
         changePasswordForm.classList.remove('hide');
         otpForm.classList.add('hide');
+        otpInputs.forEach(inp => (inp.value = ''));
+        otpInputs[0].focus();
       } 
     } catch (err) {
       const errorMessage = err.response.data.message;
@@ -126,12 +152,17 @@ const handleChangePassword = () => {
        if(response.status === 200) {
           const responseMessage = response.data.message
           popupSuccess(responseMessage);
+
+          await new Promise((res) => setTimeout(res, 2500));
+
+          const popupSuccessContainer = document.querySelector('.popup-success');
+          popupSuccessContainer.classList.add('hide');
           changePasswordForm.classList.add("hide");
           login.classList.remove("hide");
        }  
 
     } catch (err) {
-      const errorMessage = err.response.data.message;
+      const errorMessage = err?.response?.data?.message || err.message || 'An error occurred';
       popupError(errorMessage);
       changePasswordForm.reset();
     }
