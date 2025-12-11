@@ -32,7 +32,7 @@ const displayContents = async() => {
     <p class="skills">${skill}</p>
     <p class="bio">${bio}</p>
     <div class="email-me-btn">Email Me</div>
-    <div class="email-popup">Copied To Clipboard "${email}"</div>
+    <div class="email-popup hide">Email Copied To Clipboard</div>
 
     <div class="line-seperator"></div>
 
@@ -112,10 +112,9 @@ const emailPopup = () => {
     const emailMeBtn = document.querySelector('.email-me-btn');
 
     emailMeBtn.addEventListener('click', () => {
-      emailPopup.style.animation = 'none';
-      emailPopup.offsetHeight;
-
-      emailPopup.style.animation = 'popup-appear 2s ease-out';
+      emailPopup.classList.add('hide');
+      void emailPopup.offsetHeight;
+      emailPopup.classList.remove('hide');
     });
   });
 }

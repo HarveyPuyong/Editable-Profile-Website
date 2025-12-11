@@ -145,21 +145,63 @@ header{
 }
 
 .email-popup {
+  --bg-color: rgb(11, 153, 91);
+  --txt-color: white;
+  --min-width: 40px;
+  --max-width: 288px;
+
   position: fixed;
-  top: 0px;
-  opacity: 0;
+  top: 5%;
   pointer-events: none;
-  color: var(--text-color);
+  color: var(--bg-color);
+  opacity: 1;
+  font-size: 1.1rem;
+  line-height: 1.3em;
+  background-color: var(--bg-color);
+  font-weight: 600;
+  width: var(--min-width);
+  height: 44px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
+  animation: popup-appear 3.3s ease-in-out forwards;
+  animation-delay: 0.4s;
+}
+.email-popup.hide{
+  display: none;
 }
 
 @keyframes popup-appear {
   0% {
-    opacity: 1;
-    /* transform: translateY(-15px); */
+    color: var(--bg-color);
+    border-radius: 50%;
+    width: var(--min-width);
   }
-  100% {
+  15% {
+    color: var(--txt-color);
+    border-radius: 10px;
+    width: var(--max-width);
+  }
+  82% {
+    color: var(--txt-color);
+    border-radius: 10px;
+    width: var(--max-width);
+  }
+  92% {
+    border-radius: 50%;
+    color: var(--bg-color);
+    width: var(--min-width);
+  }
+  95%{
+    opacity: 1;
+  }
+  100%{
     opacity: 0;
-    transform: translateY(60px);
   }
 }
 
