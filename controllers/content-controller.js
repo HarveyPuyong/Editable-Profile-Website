@@ -3,6 +3,16 @@ const path = require('path');
 const infoDB = require('../models/content-schema');
 const UserDB = require('../models/user-schema');
 
+// Your Render backend domain
+const BACKEND_URL = "https://harvey-profile.onrender.com";
+
+// Convert relative /uploads/... to absolute URL
+const fixImageURL = (imgPath) => {
+  if (!imgPath) return null;
+  if (imgPath.startsWith("http")) return imgPath; // already full URL
+  return BACKEND_URL + imgPath;
+};
+
 // =======================
 // CHANGE CONTENT
 // =======================
@@ -68,7 +78,6 @@ const changeContent = async (req, res) => {
   }
 };
 
-
 // =======================
 // CHANGE EMAIL
 // =======================
@@ -82,31 +91,36 @@ const changeEmail = async (req, res) => {
       {}, 
       { email },
       { new: true, upsert: false }
-    ).select("email");;
+    ).select("email");
 
-     res.status(200).json({
+    res.status(200).json({
       email: updatedEmail,
       message: "Email updated successfully."
     });
     
-  }catch (err) {
+  } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Failed to update email." });
   }
-}
+};
 
 // =======================
 // GET CONTENT
 // =======================
 const getContent = async (req, res) => {
   try {
-    const info = await infoDB.findOne(); 
+    const info = await infoDB.findOne();
+    const user = await UserDB.findOne().select("email -_id");
 
-    const user = await UserDB.findOne().select("email -_id"); 
+    // AUTO FIX image URLs here
+    if (info) {
+      info.profileImage = fixImageURL(info.profileImage);
+      info.logo = fixImageURL(info.logo);
+    }
 
     res.status(200).json({
       info,
-      email: user ? user.email : null, 
+      email: user ? user.email : null,
     });
 
   } catch (error) {
@@ -115,6 +129,4 @@ const getContent = async (req, res) => {
   }
 };
 
-
-
-module.exports = { changeContent, getContent, changeEmail}
+module.exports = { changeContent, getContent, changeEmail };
