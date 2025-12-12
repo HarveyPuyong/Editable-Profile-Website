@@ -1,5 +1,5 @@
 .wrapper{
-  --wrapper-max-width: 600px;
+  --wrapper-max-width: 800px;
   --wrapper-padding: 10%;
 
   position: relative;
@@ -26,6 +26,7 @@ form{
 
 .profile-pic-container__label{
   margin-bottom: 4px;
+  font-weight: 600;
 }
 
 .profile-pic-container__image-input-icon{
@@ -122,3 +123,24 @@ form{
 .goto-landing-page-btn{
   background-color: rgb(220, 20, 20);
 } 
+
+
+@media(width <= 700px){
+  .details-list{
+    gap: 15px
+  }
+  
+  .detail{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail__input{
+    width: 98%;
+    margin-top: 5px;
+  }
+
+  .detail.logo-image-container .detail__label{
+    margin-bottom: 0;
+  }
+}

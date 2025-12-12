@@ -14,6 +14,12 @@ const corsOptions = require('./config/cors-option');
 const dbConn = require('./config/dbConn');
 const PORT = process.env.PORT || 4500;
 
+// If running in production behind a proxy (Render, Heroku, Railway), enable trust proxy
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+  console.log('Trust proxy enabled (production)');
+}
+
 dbConn.connectDB();
 
 app.use(logger);
