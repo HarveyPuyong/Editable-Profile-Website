@@ -1,4 +1,6 @@
 const defaults = [
+  'https://harvey-profile.pages.dev',
+  'https://harvey-profile.pages.dev/main-page',
   'https://extraordinary-marzipan-c0318c.netlify.app',
   'http://127.0.0.1:5500',
   'http://localhost:4500'
