@@ -5,7 +5,23 @@ import authMain from "./auth.js";
    DISPLAY CONTENT
    ========================================================================== */
 const displayContents = async() => {
-  const contents = await getContents();
+  const wrapper = document.querySelector('.wrapper');
+  const loader = document.querySelector('.cat-loading-container');
+
+  // enter loading state: hide main wrapper and show full-page loader
+  if (wrapper) wrapper.classList.add('hide');
+  if (loader) loader.classList.remove('hide');
+
+  let contents;
+  try {
+    contents = await getContents();
+  } catch (err) {
+    console.error('Failed to load contents:', err);
+    // exit loading state and reveal UI so user can see error state
+    if (loader) loader.classList.add('hide');
+    if (wrapper) wrapper.classList.remove('hide');
+    return;
+  }
 
   const email = contents.email;
 
@@ -60,6 +76,10 @@ const displayContents = async() => {
   parent.innerHTML = contentHTML;
 
   document.dispatchEvent(new Event("contentLoaded"));
+
+  // exit loading state: hide loader and reveal main wrapper
+  if (loader) loader.classList.add('hide');
+  if (wrapper) wrapper.classList.remove('hide');
 }
 
 /* ==========================================================================

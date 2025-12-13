@@ -7,7 +7,22 @@ import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
    DISPLAY CONTENT
    ========================================================================== */
 const displayContents = async() => {
-  const contents = await getContents();
+  const wrapper = document.querySelector('.wrapper');
+  const loader = document.querySelector('.cat-loading-container');
+
+  if (wrapper) wrapper.classList.add('hide');
+  if (loader) loader.classList.remove('hide');
+
+  let contents;
+  try {
+    contents = await getContents();
+  } catch (err) {
+    console.error('Failed to load contents:', err);
+    if (loader) loader.classList.add('hide');
+    if (wrapper) wrapper.classList.remove('hide');
+    popupError('Failed to load content');
+    return;
+  }
 
   const email = contents.email;
 
@@ -95,6 +110,9 @@ const displayContents = async() => {
   editForm.innerHTML = formContentHTML;
 
   document.dispatchEvent(new Event("contentLoaded"));
+
+  if (loader) loader.classList.add('hide');
+  if (wrapper) wrapper.classList.remove('hide');
 }
 
 /* ==========================================================================

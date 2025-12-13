@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/edit-page.css">
     <link rel="stylesheet" href="styles/popup-alert.css">
+    <link rel="stylesheet" href="styles/loading-animation.css">
     <!-- Axios CDN -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -16,12 +17,48 @@
       <form id="edit-form"> All contents render in edit-page.js </form>
     </div>
 
+    <!-- ==== LOADING ANIMATION ====== -->
+    <div class="cat-loading-container hide">
+      <div class="cat">
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+        <div class="cat__segment"></div>
+      </div>
+    </div>
+
     <!-- ===== SUCCESS POPUP===== -->
     <div class="popup-alert popup-success hide">
       <i class="fa-solid fa-check popup-alert__icon"></i>
 
       <p class="popup-alert__result">SUCCESS</p>
-      <p class="popup-alert__details">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque repellendus explicabo sapiente aperiam officia eius</p>
+      <p class="popup-alert__details"></p>
 
       <button class="popup-alert__button" type="button">Okay</button>
     </div>

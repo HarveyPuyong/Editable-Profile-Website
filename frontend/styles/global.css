@@ -43,3 +43,7 @@ body.night-mode{
   --accent-color: #1251FC;
   --text-color: rgb(231, 231, 231);
 }
+
+.wrapper.hide{
+  display: none;
+}
