@@ -15,6 +15,11 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Verify transporter connectivity early so production startup shows useful errors
+transporter.verify()
+  .then(() => console.log('Email transporter verified'))
+  .catch(err => console.error('Email transporter verification failed:', err));
+
 
 // =======================
 // SEND EMAIL
@@ -32,7 +37,8 @@ async function sendEmail(to, subject, text) {
 
   } catch (error) {
     console.error("Failed to send email:", error);
-    throw new Error("Email sending failed");
+    // Rethrow original error so callers and logs have the real cause in production
+    throw error;
   }
 }
 
