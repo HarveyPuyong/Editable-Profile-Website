@@ -1,6 +1,9 @@
 import { getContents } from "./../api/content-api.js"
 import authMain from "./auth.js";
 
+// holds the fetched email so other handlers can access it
+let userEmail = '';
+
 /* ==========================================================================
    DISPLAY CONTENT
    ========================================================================== */
@@ -24,6 +27,7 @@ const displayContents = async() => {
   }
 
   const email = contents.email;
+  userEmail = email || '';
 
   const {
     bio,
@@ -124,17 +128,59 @@ const toggleTheme = () => {
 };
 
 /* ==========================================================================
-   EMAIL POP UP
+   EMAIL POP UP & CLIPBOARD COPY
    ========================================================================== */
-const emailPopup = () => {
+const setupEmailPopup = () => {
   document.addEventListener('contentLoaded', () => {
-    const emailPopup = document.querySelector('.email-popup');
+    const emailPopupEl = document.querySelector('.email-popup');
     const emailMeBtn = document.querySelector('.email-me-btn');
 
-    emailMeBtn.addEventListener('click', () => {
-      emailPopup.classList.add('hide');
-      void emailPopup.offsetHeight;
-      emailPopup.classList.remove('hide');
+    if (!emailMeBtn) return;
+
+    emailMeBtn.addEventListener('click', async () => {
+      if (!userEmail) {
+        const popupError = document.querySelector('.popup-alert.popup-error');
+        if (popupError) {
+          popupError.classList.remove('hide');
+          const details = popupError.querySelector('.popup-alert__details');
+          if (details) details.innerText = 'Email not available yet.';
+        }
+        return;
+      }
+
+      // Try clipboard API, fallback to textarea copy
+      let copied = false;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(userEmail);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = userEmail;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+        copied = true;
+      } catch (e) {
+        copied = false;
+      }
+
+      if (copied && emailPopupEl) {
+        emailPopupEl.classList.add('hide');
+        void emailPopupEl.offsetHeight;
+        emailPopupEl.classList.remove('hide');
+        setTimeout(() => emailPopupEl.classList.add('hide'), 2000);
+      } else {
+        const popupError = document.querySelector('.popup-alert.popup-error');
+        if (popupError) {
+          popupError.classList.remove('hide');
+          const details = popupError.querySelector('.popup-alert__details');
+          if (details) details.innerText = 'Failed to copy email to clipboard.';
+        }
+      }
     });
   });
 }
@@ -207,7 +253,7 @@ const togglePasswordVisibility = () => {
 function Main(){
   displayContents();
   toggleTheme();
-  emailPopup();
+  setupEmailPopup();
   toggleLoginForm();
   toggleOTPForm();
   authMain();
