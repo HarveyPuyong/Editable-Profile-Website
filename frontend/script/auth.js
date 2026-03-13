@@ -1,5 +1,5 @@
 import attachInputSanitizers from "./../utils/sanitize-input.js"
-import {loginUser, sendOTP, verifyOTP, changePassword} from "./../api/auth-api.js";
+import {loginUser, sendOTP, verifyOTP, changePasswordAPI} from "./../api/auth-api.js";
 import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
 
 
@@ -117,6 +117,7 @@ const handleVerifyOTP = () => {
       const response = await verifyOTP({ otp });
 
       if (response.status === 200) {
+        sessionStorage.setItem("resetPasswordToken", response?.data?.resetToken);
         changePasswordForm.classList.remove('hide');
         otpForm.classList.add('hide');
         otpInputs.forEach(inp => (inp.value = ''));
@@ -131,13 +132,11 @@ const handleVerifyOTP = () => {
   });
 }
 
-
 // ===============================
 // HANDLE CHANGE PASSWORD
 // ===============================
 const handleChangePassword = () => {
   const changePasswordForm = document.querySelector('#reset-password-form');
-  const login = document.querySelector('#login-form');
 
   changePasswordForm.addEventListener('submit', async(e) => {
     e.preventDefault();
@@ -145,25 +144,26 @@ const handleChangePassword = () => {
     const password = document.querySelector('#new-password-input').value.trim();
     const confirmPassword = document.querySelector('#re-enter-password').value.trim();
 
-    const data = {password, confirmPassword};
+    const data = {password, confirmPassword}
+    const resetPasswordToken = sessionStorage.getItem("resetPasswordToken");
 
     try{
-      const response = await changePassword(data);
+      const response = await changePasswordAPI(data, resetPasswordToken);
+
        if(response.status === 200) {
-          const responseMessage = response.data.message
+          const responseMessage = 'Password changed successfully'
           popupSuccess(responseMessage);
-
-          await new Promise((res) => setTimeout(res, 2500));
-
-          const popupSuccessContainer = document.querySelector('.popup-success');
-          popupSuccessContainer.classList.add('hide');
-          changePasswordForm.classList.add("hide");
-          login.classList.remove("hide");
        }  
 
     } catch (err) {
-      const errorMessage = err?.response?.data?.message || err.message || 'An error occurred';
-      popupError(errorMessage);
+      const data = err.response?.data;
+
+      if (data?.errors?.length) popupError(data.errors.map(e => e.msg || e.message).join('\n'));
+      else if (data?.message) popupError(data.message);
+      else popupError("Change Password");
+      
+      console.error('Full error:', data);
+      console.error(err);
       changePasswordForm.reset();
     }
   });

@@ -1,7 +1,7 @@
 .loading-container{
   position: fixed;
   display: flex;
-  gap: 3px;
+  gap: 12px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: #000000d4;
+  background: #0d0d0d;
   z-index: 1000;
 }
 .loading-container.hide{

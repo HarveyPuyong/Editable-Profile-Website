@@ -1,7 +1,7 @@
 /* ==========================================================================
    CLOSE POPUP ALERT
    ========================================================================== */
-const closePopupAlert = () => {
+const closePopupAlert = (detail) => {
   const popupContainers = document.querySelectorAll('.popup-alert');
 
   popupContainers.forEach(popup => {
@@ -9,6 +9,14 @@ const closePopupAlert = () => {
     
     popupButton.addEventListener('click', () => {
       popup.classList.add('hide');
+
+      if(!detail) return
+
+      if(detail === 'Password changed successfully') {
+          document.querySelector('.popup-success').classList.add('hide');
+          document.querySelector('#reset-password-form').classList.add("hide");
+          document.querySelector('#login-form').classList.remove("hide");
+      }
     })
   });
 }
@@ -22,7 +30,7 @@ function popupSuccess(detail) {
   popupContainer.classList.remove('hide');
   
   popupContainer.querySelector('.popup-alert__details').innerText = detail;
-  closePopupAlert();
+  closePopupAlert(detail);
 }
 
 
@@ -34,7 +42,7 @@ function popupError(detail) {
   popupContainer.classList.remove('hide');
   
   popupContainer.querySelector('.popup-alert__details').innerText = detail;
-  closePopupAlert();
+  closePopupAlert(detail);
 }
 
 

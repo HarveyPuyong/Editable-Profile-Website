@@ -1,5 +1,5 @@
 const api = axios.create({
-  baseURL: 'https://harvey-profile.onrender.com',
+  baseURL: 'http://localhost:4500',
   withCredentials: true
 });
 
@@ -31,7 +31,7 @@ api.interceptors.response.use(
       } catch (refreshErr) {
         console.error("Token refresh failed", refreshErr);
         localStorage.removeItem('accessToken');
-        window.location.href = '/landing-page.html';
+        window.location.href = '/main-page.html';
       }
     }
 
