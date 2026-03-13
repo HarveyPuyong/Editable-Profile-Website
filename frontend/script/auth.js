@@ -8,7 +8,7 @@ import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
    ========================================================================== */
 const handleLogin = () => {
   const loginForm = document.getElementById('login-form');
-  const loader = document.querySelector('.cat-loading-container');
+  const loader = document.querySelector('.loading-container');
 
   loginForm.addEventListener('submit', async(e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ const handleLogin = () => {
 // ===============================
 const handleSendOTP = () => {
   const buttons = document.querySelectorAll('.login-form__forgot-password, .otp-form__resend-otp');
-  const loader = document.querySelector('.cat-loading-container');
+  const loader = document.querySelector('.loading-container');
 
   buttons.forEach(button => {
     button.addEventListener('click', async () => {

@@ -8,7 +8,7 @@ import  {popupSuccess, popupError} from "./../utils/popup-alert.js"
    ========================================================================== */
 const displayContents = async() => {
   const wrapper = document.querySelector('.wrapper');
-  const loader = document.querySelector('.cat-loading-container');
+  const loader = document.querySelector('.loading-container');
 
   if (wrapper) wrapper.classList.add('hide');
   if (loader) loader.classList.remove('hide');

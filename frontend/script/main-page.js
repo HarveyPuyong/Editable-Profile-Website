@@ -9,7 +9,7 @@ let userEmail = '';
    ========================================================================== */
 const displayContents = async() => {
   const wrapper = document.querySelector('.wrapper');
-  const loader = document.querySelector('.cat-loading-container');
+  const loader = document.querySelector('.loading-container');
 
   // enter loading state: hide main wrapper and show full-page loader
   if (wrapper) wrapper.classList.add('hide');
